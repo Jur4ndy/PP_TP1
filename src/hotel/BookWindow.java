@@ -29,8 +29,8 @@ public class BookWindow extends JFrame {
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Description label
-        JLabel title = new JLabel("Select the days and amount of people you wish to book");
-        title.setForeground(new Color(100, 100, 100));
+        JLabel title = new JLabel("Select the days and amount of people you wish to book for");
+        title.setForeground(new Color(255, 255, 255));
         title.setFont(new Font("MV Boli", Font.PLAIN, 40));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -43,33 +43,55 @@ public class BookWindow extends JFrame {
         /**
          * These JSpinners will be used to select the amount of people and days the person wishes to book
          */
-        JSpinner days = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));  
+        JSpinner days = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));  
         days.setSize(getPreferredSize());
-        JSpinner people = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+        JLabel daysLabel = new JLabel("Days");
+        daysLabel.setFont(new Font("MV Boli", Font.PLAIN, 30));
+        daysLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        daysLabel.setForeground(new Color(29, 22, 26));
+        JSpinner people = new JSpinner(new SpinnerNumberModel(1, 1, 8, 1));
+        JLabel peopleLabel = new JLabel("N° of People");
+        peopleLabel.setFont(new Font("MV Boli", Font.PLAIN, 30));
+        peopleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        peopleLabel.setForeground(new Color(29, 22, 26));
         people.setSize(getPreferredSize());
         
         JPanel spinnerPanel = new JPanel();
-        spinnerPanel.setLayout(new BoxLayout(spinnerPanel, BoxLayout.LINE_AXIS));
+        spinnerPanel.setLayout(new GridLayout(2, 2));
         spinnerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        spinnerPanel.add(daysLabel);
         spinnerPanel.add(days);
-        spinnerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        spinnerPanel.add(peopleLabel);
         spinnerPanel.add(people);
-        spinnerPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        spinnerPanel.setBackground(new Color(100, 85, 60));
+        
+        JPanel helperPanel = new JPanel();
+        helperPanel.setLayout(new BoxLayout(helperPanel, BoxLayout.LINE_AXIS));
+        helperPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        helperPanel.add(Box.createHorizontalGlue());
+        helperPanel.add(spinnerPanel);
+        helperPanel.add(Box.createHorizontalGlue());
+        helperPanel.setOpaque(false);
 
         /**
          *  These JButtons will be used to either open a new window to continue the booking process or close this one, retuning to
          *  the MainWindow
          */
-        JButton book = new JButton("Proceed");       
-        JButton loginStaff = new JButton("Cancel");
+        JButton proceed = new JButton("Proceed");   
+        JButton cancel = new JButton("Cancel");
+        cancel.addActionListener((ActionEvent e) -> {
+    		
+        	  this.dispose();
+
+          });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
         buttonPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonPanel.add(book);
+        buttonPanel.add(proceed);
         buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-        buttonPanel.add(loginStaff);
+        buttonPanel.add(cancel);
 
         /** 
          * Add components to a JPanel with spacing, the vertical glues will ensure the JButtons are close to the center of the window
@@ -82,7 +104,7 @@ public class BookWindow extends JFrame {
         rootPanel.add(ref);
         rootPanel.add(Box.createVerticalStrut(20));
         rootPanel.add(Box.createVerticalGlue());
-        rootPanel.add(spinnerPanel);
+        rootPanel.add(helperPanel);
         rootPanel.add(Box.createVerticalGlue());
         rootPanel.add(buttonPanel);
         rootPanel.add(Box.createVerticalStrut(30));

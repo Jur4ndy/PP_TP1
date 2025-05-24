@@ -33,13 +33,13 @@ public class MainWindow extends JFrame {
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Title label
-        JLabel title = new JLabel("Welcome to the world-renowned Celestial Resort Hotel!");
-        title.setForeground(new Color(100, 100, 100));
+        JLabel title = new JLabel("Welcome the world-renowned Celestial Resort Hotel!");
         title.setFont(new Font("MV Boli", Font.PLAIN, 40));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(new Color(255, 255, 255));
 
         // Reference label
-        JLabel ref = new JLabel("yes, this is a Celeste reference");
+        JLabel ref = new JLabel("yes, I based my project on Celeste");
         ref.setForeground(new Color(95, 100, 100));
         ref.setFont(new Font("MV Boli", Font.ITALIC, 20));
         ref.setAlignmentX(Component.CENTER_ALIGNMENT);
