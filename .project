@@ -14,26 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/hotel/Kevin.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Pictures/Screenshots/Screenshot%20from%202025-05-23%2023-32-56.png</locationURI>
-		</link>
-		<link>
-			<name>src/hotel/Strawberry.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Pictures/Screenshots/Screenshot%20from%202025-05-23%2019-02-24.png</locationURI>
-		</link>
-		<link>
-			<name>src/hotel/icon.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Pictures/Screenshots/Screenshot%20from%202025-05-23%2019-02-49.png</locationURI>
-		</link>
-		<link>
-			<name>src/hotel/icon_smol.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Pictures/Screenshots/Screenshot%20from%202025-05-23%2019-03-06.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
