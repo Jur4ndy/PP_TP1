@@ -1,15 +1,17 @@
 package hotel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*;
 
 /**
- * Main Window class 
+ * Main Window class, every other class will be used here to create it.
  */
 
 public class MainWindow extends JFrame {
 	
 	
-	//Baseado no capítulo 3 de Celeste
+	//Constructor Method
 	public MainWindow () {
 		super("Celestial Resort Hotel");
 
@@ -42,9 +44,21 @@ public class MainWindow extends JFrame {
         ref.setFont(new Font("MV Boli", Font.ITALIC, 20));
         ref.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Buttons
+        /**
+         *  These JButtons will be used to open the other windows, one for clients who wish to book their stay. and another for 
+         *  the staff to log in and see information that shouldn't be available to clients.
+         */
         JButton book = new JButton("Book Now!");
-        JButton loginStaff = new JButton("Staff Login");
+        
+        //Open BookWindow when pressed
+        book.addActionListener((ActionEvent e) -> {
+    		
+      	  BookWindow bookWindow = new BookWindow();
+      	  bookWindow.setVisible(true);
+
+        });
+        
+        JButton login = new JButton("Staff Login");
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
@@ -52,9 +66,11 @@ public class MainWindow extends JFrame {
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(book);
         buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-        buttonPanel.add(loginStaff);
+        buttonPanel.add(login);
 
-        // Add components with spacing
+        /** 
+         * Add components to a JPanel with spacing, the vertical glues will ensure the JButtons are close to the center of the window
+         */
         rootPanel.add(Box.createVerticalStrut(30));
         rootPanel.add(logo);
         rootPanel.add(Box.createVerticalStrut(20));
@@ -74,6 +90,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	public static void main(String args[]) {
+		//Create the window and set it to visible
 		MainWindow window = new MainWindow();
 		window.setVisible(true);
 	}
