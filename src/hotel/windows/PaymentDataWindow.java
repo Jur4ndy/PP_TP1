@@ -1,4 +1,4 @@
-package hotel;
+package hotel.windows;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
