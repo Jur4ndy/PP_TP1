@@ -4,11 +4,14 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 
+import hotel.structures.*;
+import hotel.database.*;
+
 public class PaymentDataWindow extends JFrame {
 	
 	
 	
-	public PaymentDataWindow (int people, int days, char roomType) {
+	public PaymentDataWindow (int people, int days, char roomType, Hotel hotel) {
 		super("Payment");
 	
 		
@@ -188,27 +191,44 @@ public class PaymentDataWindow extends JFrame {
          */
         JButton proceed = new JButton("Proceed");   
         JButton cancel = new JButton("Cancel");
-        proceed.addActionListener((ActionEvent e) -> {
-    			if(phoneNumber.getText().matches(".*\\d.*") && cpf.getText().matches(".*\\d.*")) {
+        
+        ClientInfoDAO info = new ClientInfoDAO();
+        ReservationDAO reservations = new ReservationDAO();
+        proceed.addActionListener((ActionEvent a) -> {
 	    			int choice = JOptionPane.showConfirmDialog(null, "Are you sure your info is correct?");
 	    			if (choice == JOptionPane.YES_OPTION) {
-	    	            // If the user chose 'Yes', show a message indicating that changes are saved
-	    				/**
-	    				 * If everything all the info is ok, we'll check if there is a room available for those days.
-	    				 * If it is, we will add the client's data to the databank and close this window.
-	    				 */
-	    	            JOptionPane.showMessageDialog(null, "Your booking was sucessful!");
-	    	            this.dispose();
-	    	        } else if (choice == JOptionPane.NO_OPTION) {
+	    	            try {
+	    	            	Date start = new Date((Integer)day.getValue(), (Integer)month.getValue(), (Integer)year.getValue());
+	    	            	Reservation r = new Reservation(Integer.parseInt(cpf.getText()), start, start.add(days));
+	    	            	System.out.println("Checkpoint 1");
+ 	    	            	int [] id_index = hotel.checkAvailable(r, roomType);
+	    	            	System.out.println("Checkpoint 2");
+	    	            	if (id_index[0] != -1) {
+		    	            	if (null == info.getClientInfo(Integer.parseInt(cpf.getText()))) {
+		    	            		info.addClient(new ClientInfo(name.getText(), Integer.parseInt(cpf.getText()), adress.getText(), 
+	 	            					   						  Integer.parseInt(phoneNumber.getText())));
+		    	            	}
+		    	            	reservations.addReservation(r, id_index[0]);
+		    	            	System.out.println("Checkpoint 3");
+		    	            	hotel.rooms.get(id_index[0]).reservations.add(id_index[1], r);
+	    	            	}
+		    	            else  {
+		    	            	JOptionPane.showMessageDialog(null, "Unfortunately, there are no Rooms available for this reservation...");
+		    	            }
+	    	            	this.dispose();
+	    	            }
+	    	            catch(Exception e) {
+	    	            	System.out.println("Error at PaymentDataWindow: " + e);
+	    	            	JOptionPane.showMessageDialog(null, "An error has Ocurred, make sure your phone number and"
+	    	            	+ "cpf are composed of ONLY numbers."); 
+	    	            }
+	    			}    	            	    	         
+    			    else if (choice == JOptionPane.NO_OPTION) {
 	    	            // If the user chose 'No', show a message indicating that changes are not saved
 	    	            JOptionPane.showMessageDialog(null, "Please correct your info.");
 	    	        } else {
 	    	        	
 	    	     }
-    			}
-    			else {
-    				JOptionPane.showMessageDialog(null, "Invalid phone number and/or CPF.");
-    			}
         });
         cancel.addActionListener((ActionEvent e) -> {
     		

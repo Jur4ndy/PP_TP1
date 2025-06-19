@@ -4,11 +4,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+import hotel.structures.*;
+
+
 public class BookWindow extends JFrame {
 	
 	
 	
-	public BookWindow () {
+	public BookWindow (Hotel hotel) {
 		super("Room Select");
 		
 		// Window icon
@@ -81,7 +84,7 @@ public class BookWindow extends JFrame {
         JButton cancel = new JButton("Cancel");
         proceed.addActionListener((ActionEvent e) -> {
     		
-        	RoomSelectWindow roomWindow = new RoomSelectWindow((int)people.getValue(), (int)days.getValue());
+        	RoomSelectWindow roomWindow = new RoomSelectWindow((int)people.getValue(), (int)days.getValue(), hotel);
         	roomWindow.setVisible(true);
 
         });

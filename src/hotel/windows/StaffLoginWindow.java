@@ -3,14 +3,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-
+import hotel.structures.*;
+import hotel.database.StaffLoginDAO;
 public class StaffLoginWindow extends JFrame {
 	
 	
 	
-	public StaffLoginWindow (int people, int days, char roomType) {
+	public StaffLoginWindow (Hotel hotel) {
 		super("Staff Login");
-	
+		
+		StaffLoginDAO staffData = new StaffLoginDAO();
 		
 		// Window icon
         ImageIcon mainIcon = new ImageIcon(getClass().getResource("Kevin.png"));
@@ -24,9 +26,12 @@ public class StaffLoginWindow extends JFrame {
         rootPanel.setBackground(new Color(47, 32, 30)); // Set Background Color
         rootPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // house icon
-        ImageIcon iconCh3 = new ImageIcon(getClass().getResource("chapter8icon.png"));
-        JLabel icon = new JLabel(iconCh3);
+        // birb icon
+        ImageIcon icon_aux = new ImageIcon(getClass().getResource("birb.png"));
+        img =  icon_aux.getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+        JLabel icon = new JLabel(icon_aux);
+        icon.setBackground(new Color(47, 32, 30));
+        //icon.setMaximumSize(new Dimension(10, 10));
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Description label
@@ -85,22 +90,32 @@ public class StaffLoginWindow extends JFrame {
         		/**
         		 * Check if the username exists and if that user's password matches the inserted password.
         		 */
-    			if(true) {
-	    			int choice = JOptionPane.showConfirmDialog(null, "Are you sure your info is correct?");
-	    			if (choice == JOptionPane.YES_OPTION) {
-	    	            // If the user chose 'Yes', show a message indicating that changes are saved
-	    				// Open staff window
-	    	            this.dispose();
-	    	        } else if (choice == JOptionPane.NO_OPTION) {
-	    	            // If the user chose 'No', show a message indicating that changes are not saved
-	    	            JOptionPane.showMessageDialog(null, "Please correct your info.");
-	    	        } else {
-	    	        	
-	    	     }
-    			}
-    			else {
-    				JOptionPane.showMessageDialog(null, "Invalid phone number and/or CPF.");
-    			}
+        		int rank;
+        	    int choice = JOptionPane.showConfirmDialog(null, "Are you sure your info is correct?");
+        	    if (choice == JOptionPane.YES_OPTION) {
+    	            // If the user chose 'Yes', show a message indicating that changes are saved
+    				// Open staff window
+        	    	if(staffData.login(user.getText(), password.getText())) {
+        	    		rank = staffData.getRank(user.getText());
+        	    		if (rank == 0) {
+        	    			ManagerWindow manage = new ManagerWindow(hotel);
+        	    			manage.setVisible(true);
+        	    		}
+        	    		else {
+        	    			StaffWindow staff = new StaffWindow(hotel);
+        	    			staff.setVisible(true);
+        	    		}
+        	    	} 
+        	    	else {
+        				JOptionPane.showMessageDialog(null, "Incorrect username or password");
+        			}
+        	   
+    			}       	    
+        		else if (choice == JOptionPane.NO_OPTION) {
+	            // If the user chose 'No', show a message indicating that changes are not saved
+	            JOptionPane.showMessageDialog(null, "Please correct your info.");
+        		}
+        	    
         });
         cancel.addActionListener((ActionEvent e) -> {
     		
@@ -109,6 +124,7 @@ public class StaffLoginWindow extends JFrame {
           });
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
         buttonPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -121,6 +137,10 @@ public class StaffLoginWindow extends JFrame {
          */
         rootPanel.add(Box.createVerticalStrut(30));
         rootPanel.add(icon);
+        
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        rootPanel.add(panel);
         rootPanel.add(Box.createVerticalStrut(20));
         rootPanel.add(title);
         rootPanel.add(Box.createVerticalStrut(10));

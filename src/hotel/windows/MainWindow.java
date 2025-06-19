@@ -2,6 +2,8 @@ package hotel.windows;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
+import hotel.structures.*;
+import hotel.database.*;
 
 /**
  * Main Window class, every other class will be used here to create it.
@@ -13,7 +15,15 @@ public class MainWindow extends JFrame {
 	//Constructor Method
 	public MainWindow () {
 		super("Celestial Resort Hotel");
-
+		
+		/*
+		 * Instantiate a new Hotel that will be used for other windows
+		 */
+		Hotel hotel = new Hotel();
+		ReservationDAO reserveDAO = new ReservationDAO();
+		System.out.println(reserveDAO.getReservations(hotel));
+		
+		
         // Window icon
         ImageIcon mainIcon = new ImageIcon(getClass().getResource("Kevin.png"));
         Image img = mainIcon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
@@ -29,6 +39,7 @@ public class MainWindow extends JFrame {
         // Logo
         ImageIcon iconCh3 = new ImageIcon(getClass().getResource("chapter3icon.png"));
         JLabel logo = new JLabel(iconCh3);
+        //logo.setMaximumSize(new Dimension(400, 100));
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Title label
@@ -52,12 +63,20 @@ public class MainWindow extends JFrame {
         //Open BookWindow when pressed
         book.addActionListener((ActionEvent e) -> {
     		
-      	  BookWindow bookWindow = new BookWindow();
+      	  BookWindow bookWindow = new BookWindow(hotel);
       	  bookWindow.setVisible(true);
 
         });
         
         JButton login = new JButton("Staff Login");
+        
+      //Open StaffLoginWindow when pressed
+        login.addActionListener((ActionEvent e) -> {
+    		
+        	  StaffLoginWindow staffLoginWindow = new StaffLoginWindow(hotel);
+        	  staffLoginWindow.setVisible(true);
+
+          });
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));

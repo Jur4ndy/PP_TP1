@@ -1,5 +1,8 @@
 package hotel.structures;
 
+/**
+ * Class used to represent the information given by clients on the payment info screen.
+ */
 public class ClientInfo {
 	public String name;
 	public int cpf;

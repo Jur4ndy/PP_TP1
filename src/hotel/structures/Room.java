@@ -2,25 +2,29 @@ package hotel.structures;
 import java.util.*;
 
 
-
+/**
+ * The Room class is here to keep track of every reservation within each room, as well as their type.
+ */
 public class Room {
+		
 		char type;
-		LinkedList<Reservation> reservations = new LinkedList<Reservation>();
+		public LinkedList<Reservation> reservations = new LinkedList<Reservation>();
 		
 		public Room(char type) {
 			this.type = type;
 		}
 		
 		/**
-		 * checkAvailable takes one Reservation and returns an integer array of two digits
-		 * the first integer will be equivalent to the index the reservation should be added to in order to make it ordered by date
-		 * the second integer will represent how much free space is between the new reservation and the pre-existing ones.
+		 * checkAvailable takes one Reservation and returns an integer array of two digits:
+		 * The first integer will be equivalent to the index the reservation should be added to ensure it is ordered by date,
+		 * the second integer will represent how much free space is between the new reservation and the pre-existing ones (used for Best-Fit
+		 * Algorithm).
 		 */
-		public int[] checkAvailable(Reservation newR, Date current_date) {	
-			int[] ans = new int[2];
-			if (reservations.isEmpty() || reservations.get(0).start.compare(newR.end) > 0) {
-				ans[0] = 0;
-				ans[1] = current_date.getDifference(newR.start) + newR.end.getDifference(reservations.get(0).start);
+		public int[] checkAvailable(Reservation newReservation, Date current_date) {	
+			if (reservations.isEmpty() || reservations.get(0).start.compare(newReservation.end) > 0) {
+				System.out.println("Empty Room/First Reservation");
+				int[] ans = {0, current_date.getDifference(newReservation.start) + newReservation.end.getDifference(reservations.get(0).start)};
+				System.out.println("Empty Room/First Reservation");
 				return ans;
 			}
 			
@@ -29,19 +33,17 @@ public class Room {
 			int size = reservations.size();
 			for (int index = 1; index < size; index++) {
 				current = reservations.get(index);
-				if (current.end.compare(newR.start) < 0) {
+				if (current.end.compare(newReservation.start) < 0) {
 					previous = current;
 					continue;
 				}
-				else if (previous.end.compare(newR.start) > 0 && current.start.compare(newR.end) < 0) {
-					ans[0] = index;
-					ans[1] = previous.end.getDifference(newR.start) + newR.end.getDifference(current.start);
+				else if (previous.end.compare(newReservation.start) > 0 && current.start.compare(newReservation.end) < 0) {
+					int[] ans = {index, previous.end.getDifference(newReservation.start) + newReservation.end.getDifference(current.start)};
 					return ans;
 				}
 				else break;
 			}
-			ans[0] = -1;
-			ans[1] = -1;
+			int[] ans = {-1, -1};
 			return ans;
 		}
 		
@@ -62,19 +64,23 @@ public class Room {
 		
 		/**
 		 * The function addReservations is to be used to add reservations from the database when this variable is first created.
-		 * 
-		 * The function sortReservations is to be used after all the reservations from the database are inserted, it sorts
-		 * all the reservations by start date in order to ensure that the function checkAvailable works as intended.
 		 */
 		public void addReservation(Reservation reservation) {
 			reservations.add(reservation);
 		}
 		
+		/**
+		 * The function sortReservations is to be used after all the reservations from the database are inserted, it sorts
+		 * all the reservations by start date in order to ensure that the function checkAvailable works as intended.
+		 */
 		public void sortReservations() {
 			Collections.sort(reservations, new SortByStartDate());
 		}
 }
 
+/**
+ * this class is used simply to utilize Collections.sort()
+ */
 class SortByStartDate implements Comparator<Reservation>{
 
 	@Override
