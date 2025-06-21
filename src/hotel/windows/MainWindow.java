@@ -6,9 +6,8 @@ import hotel.structures.*;
 import hotel.database.*;
 
 /**
- * Main Window class, every other class will be used here to create it.
+ * Main Window, from here you can go to either the stafflogin window or the book window.
  */
-
 public class MainWindow extends JFrame {
 	
 	
@@ -19,9 +18,6 @@ public class MainWindow extends JFrame {
 		/*
 		 * Instantiate a new Hotel that will be used for other windows
 		 */
-		Hotel hotel = new Hotel();
-		ReservationDAO reserveDAO = new ReservationDAO();
-		System.out.println(reserveDAO.getReservations(hotel));
 		
 		
         // Window icon
@@ -63,7 +59,7 @@ public class MainWindow extends JFrame {
         //Open BookWindow when pressed
         book.addActionListener((ActionEvent e) -> {
     		
-      	  BookWindow bookWindow = new BookWindow(hotel);
+      	  BookWindow bookWindow = new BookWindow();
       	  bookWindow.setVisible(true);
 
         });
@@ -73,7 +69,7 @@ public class MainWindow extends JFrame {
       //Open StaffLoginWindow when pressed
         login.addActionListener((ActionEvent e) -> {
     		
-        	  StaffLoginWindow staffLoginWindow = new StaffLoginWindow(hotel);
+        	  StaffLoginWindow staffLoginWindow = new StaffLoginWindow();
         	  staffLoginWindow.setVisible(true);
 
           });

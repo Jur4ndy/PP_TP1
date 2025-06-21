@@ -10,9 +10,9 @@ import hotel.structures.*;
 import hotel.database.*;
 
 /**
- * This Window is for the Manager, in this case, Oshiro
- * Here you can do everything you can on the Staff Window and more! 
- * Most notably Oshiro can add new Staff into the system by setting their username and password.
+ * This Window is for the Staff, 
+ * Here you can check how many rooms have some reservation, how many staff are registered in the database
+ * and which reservations are linked to a certain cpf.
  */
 public class StaffWindow extends JFrame {
 

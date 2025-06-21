@@ -6,12 +6,14 @@ import javax.swing.*;
 
 import hotel.structures.*;
 
-
+/**
+ * In this Window the client selects both the amount of people and days for the reservation.
+ */
 public class BookWindow extends JFrame {
 	
 	
 	
-	public BookWindow (Hotel hotel) {
+	public BookWindow () {
 		super("Room Select");
 		
 		// Window icon
@@ -84,7 +86,7 @@ public class BookWindow extends JFrame {
         JButton cancel = new JButton("Cancel");
         proceed.addActionListener((ActionEvent e) -> {
     		
-        	RoomSelectWindow roomWindow = new RoomSelectWindow((int)people.getValue(), (int)days.getValue(), hotel);
+        	RoomSelectWindow roomWindow = new RoomSelectWindow((int)people.getValue(), (int)days.getValue());
         	roomWindow.setVisible(true);
 
         });

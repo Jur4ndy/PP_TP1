@@ -44,8 +44,9 @@ public class Hotel {
 		int roomID = 0;
 		int index = -1;
 		for(Room room : rooms) {
+			if (room.type != type) {roomID++; continue;} 
 			int[] aux = room.checkAvailable(reservation, current_date);
-			if (aux[1] < min) {
+			if (aux[1] < min && aux[0] != -1) {
 				id = roomID;
 				min = aux[1];
 				index = aux[0];

@@ -10,7 +10,7 @@ import hotel.structures.*;
 import hotel.database.*;
 
 /**
- * This Window is for the Manager, in this case, Oshiro
+ * This Window is for the Manager, in this case, Oshiro (username Oshiro, password Farewell)
  * Here you can do everything you can on the Staff Window and more! 
  * Most notably Oshiro can add new Staff into the system by setting their username and password.
  */

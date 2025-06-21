@@ -4,13 +4,22 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import hotel.structures.*;
+import hotel.database.ReservationDAO;
 import hotel.database.StaffLoginDAO;
+
+/**
+ * This window asks for a username and a password. if it maches any of the rows in the SQL table, the user's rank window is opened.
+ */
 public class StaffLoginWindow extends JFrame {
 	
 	
 	
-	public StaffLoginWindow (Hotel hotel) {
+	public StaffLoginWindow () {
 		super("Staff Login");
+		
+		Hotel hotel = new Hotel();
+		ReservationDAO reserveDAO = new ReservationDAO();
+		System.out.println(reserveDAO.getReservations(hotel));
 		
 		StaffLoginDAO staffData = new StaffLoginDAO();
 		

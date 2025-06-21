@@ -21,10 +21,14 @@ public class Room {
 		 * Algorithm).
 		 */
 		public int[] checkAvailable(Reservation newReservation, Date current_date) {	
-			if (reservations.isEmpty() || reservations.get(0).start.compare(newReservation.end) > 0) {
-				System.out.println("Empty Room/First Reservation");
+			if (reservations.isEmpty()) {
+				System.out.println("Empty Room");
+				int [] ans = {0, -1};
+				return ans;
+			}
+			if (reservations.get(0).start.compare(newReservation.end) > 0) {
+				System.out.println("First Reservation");
 				int[] ans = {0, current_date.getDifference(newReservation.start) + newReservation.end.getDifference(reservations.get(0).start)};
-				System.out.println("Empty Room/First Reservation");
 				return ans;
 			}
 			
@@ -43,7 +47,7 @@ public class Room {
 				}
 				else break;
 			}
-			int[] ans = {-1, -1};
+			int[] ans = {-1, Integer.MAX_VALUE};
 			return ans;
 		}
 		

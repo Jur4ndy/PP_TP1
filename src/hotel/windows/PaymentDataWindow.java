@@ -7,13 +7,18 @@ import javax.swing.GroupLayout.Alignment;
 import hotel.structures.*;
 import hotel.database.*;
 
+/**
+ * In this window the price of the reservation is calculated and some things are determined: the start date of the reservation (which
+ * when added with its duration also give us the end date) and the ckient's information.
+ */
 public class PaymentDataWindow extends JFrame {
 	
 	
 	
-	public PaymentDataWindow (int people, int days, char roomType, Hotel hotel) {
+	public PaymentDataWindow (int people, int days, char roomType) {
 		super("Payment");
-	
+		ReservationDAO reserveDAO = new ReservationDAO();
+		
 		
 		// Window icon
         ImageIcon mainIcon = new ImageIcon(getClass().getResource("Kevin.png"));
@@ -198,6 +203,8 @@ public class PaymentDataWindow extends JFrame {
 	    			int choice = JOptionPane.showConfirmDialog(null, "Are you sure your info is correct?");
 	    			if (choice == JOptionPane.YES_OPTION) {
 	    	            try {
+	    	            	Hotel hotel = new Hotel();
+	    	            	System.out.println(reserveDAO.getReservations(hotel));
 	    	            	Date start = new Date((Integer)day.getValue(), (Integer)month.getValue(), (Integer)year.getValue());
 	    	            	Reservation r = new Reservation(Integer.parseInt(cpf.getText()), start, start.add(days));
 	    	            	System.out.println("Checkpoint 1");

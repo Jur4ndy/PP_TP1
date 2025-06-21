@@ -6,11 +6,14 @@ import javax.swing.*;
 
 import hotel.structures.*;
 
+/**
+ * In this window the type of room the client wishes to book is decided, some rooms will not be available for a certain amount of people.
+ */
 public class RoomSelectWindow extends JFrame{
 	
 	int people;
 	
-	public RoomSelectWindow(int p, int d, Hotel hotel) {
+	public RoomSelectWindow(int p, int d) {
 		
 		people = p;
 		
@@ -54,7 +57,7 @@ public class RoomSelectWindow extends JFrame{
         
         single.addActionListener((ActionEvent e) -> {
         	if (p < 4) {
-	    		PaymentDataWindow pay = new PaymentDataWindow(p, d, 'S', hotel);
+	    		PaymentDataWindow pay = new PaymentDataWindow(p, d, 'S');
 	    		pay.setVisible(true);
         	}
         	else {
@@ -64,7 +67,7 @@ public class RoomSelectWindow extends JFrame{
           });
         doubl.addActionListener((ActionEvent e) -> {
         	if (p < 6) {
-	    		PaymentDataWindow pay = new PaymentDataWindow(p, d, 'D', hotel);
+	    		PaymentDataWindow pay = new PaymentDataWindow(p, d, 'D');
 	    		pay.setVisible(true);
         	}
         	else {
@@ -73,7 +76,7 @@ public class RoomSelectWindow extends JFrame{
 
         });
         suite.addActionListener((ActionEvent e) -> {
-    		PaymentDataWindow pay = new PaymentDataWindow(p, d, 'P', hotel);
+    		PaymentDataWindow pay = new PaymentDataWindow(p, d, 'P');
     		pay.setVisible(true);
 
         });

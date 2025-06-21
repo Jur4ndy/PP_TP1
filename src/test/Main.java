@@ -1,5 +1,4 @@
 package test;
-import hotel.*;
 import hotel.windows.*;
 
 public class Main {

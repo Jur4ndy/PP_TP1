@@ -14,7 +14,7 @@ public class ClientInfoDAO extends SQLDatabase{
 	      ResultSet rs = st.executeQuery("SELECT * FROM ClientsInfo WHERE " + 
 	                                     "cpf='" + cpf + "'");
 	      if (rs.next()) {
-	        return new ClientInfo(rs.getString(2), Integer.parseInt(rs.getString(3)), rs.getString(4), Integer.parseInt(rs.getString(5)));
+	        return new ClientInfo(rs.getString(2), Integer.parseInt(rs.getString(4)), rs.getString(3), Integer.parseInt(rs.getString(5)));
 	      }
 	      else return null;
 	    }
@@ -27,7 +27,7 @@ public class ClientInfoDAO extends SQLDatabase{
 	      ResultSet rs = st.executeQuery("SELECT * FROM ClientsInfo WHERE " + 
 	                                     "name='" + name + "'");
 	      if (rs.next()) {
-	        return new ClientInfo(rs.getString(1), Integer.parseInt(rs.getString(2)), rs.getString(3), Integer.parseInt(rs.getString(4)));
+	        return new ClientInfo(rs.getString(2), Integer.parseInt(rs.getString(4)), rs.getString(3), Integer.parseInt(rs.getString(5)));
 	      }
 	      else return null;
 	    }
@@ -40,12 +40,12 @@ public class ClientInfoDAO extends SQLDatabase{
 	      ResultSet rs =  st.executeQuery("SELECT * FROM ClientsInfo WHERE " + "cpf='" + clientinfo.cpf + "'");
 	      //if theres no client with this cpf.
 	      if (!rs.next()){
-	              int affected = st.executeUpdate("INSERT INTO ClientsInfo VALUES('" + clientinfo.name + "', " + clientinfo.cpf + 
-                          ", '" + clientinfo.adress + "', " + clientinfo.phoneNumber + ")");
+	              int affected = st.executeUpdate("INSERT INTO ClientsInfo VALUES(NULL, '" + clientinfo.name + "', '" + clientinfo.adress + 
+                          "', " + clientinfo.cpf + ", " + clientinfo.phoneNumber + ")");
 	              if (affected > 0) return true  ;
 	      }
 	      return false;
-	    } catch (SQLException e) { System.out.println(e); return false; }
+	    } catch (SQLException e) { System.out.println(e + " at ClientInfoDAO addClient()"); return false; }
 	  }
 	
 	
