@@ -124,7 +124,7 @@ public class BookWindow extends JFrame {
         // Add rootPanel to frame
         this.setContentPane(rootPanel);
         this.setSize(1660, 600);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null); // center on screen
 	}
 }

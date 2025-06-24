@@ -216,7 +216,7 @@ public class PaymentDataWindow extends JFrame {
 	 	            					   						  Integer.parseInt(phoneNumber.getText())));
 		    	            	}
 		    	            	reservations.addReservation(r, id_index[0]);
-		    	            	System.out.println("Checkpoint 3");
+		    	            	JOptionPane.showMessageDialog(null, "You have been assigned to Room " + id_index[0]);
 		    	            	hotel.rooms.get(id_index[0]).reservations.add(id_index[1], r);
 	    	            	}
 		    	            else  {
@@ -275,7 +275,7 @@ public class PaymentDataWindow extends JFrame {
         // Add rootPanel to frame
         this.setContentPane(rootPanel);
         this.setSize(1660, 600);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null); // center on screen
 	}
 }

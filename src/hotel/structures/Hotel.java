@@ -8,7 +8,8 @@ import java.util.*;
 
 public class Hotel {
 	//change this value to set current date
-	Date current_date = new Date(1, 1, 2025);
+	public static Date current_date = new Date(1, 1, 2025);
+	public static int size = 40;
 	public ArrayList<Room> rooms = new ArrayList<Room>();
 	
 	public Hotel() {
@@ -58,13 +59,13 @@ public class Hotel {
 	}
 	
 	/**
-	 * gets the amount of rooms that have absolutely no reservations.
+	 * gets the amount of reservations in each room.
 	 */
-	public int getOccupied() {
-		int r = 0;
+	public LinkedList<Integer> getOccupied() {
+		LinkedList<Integer> r = new LinkedList<Integer>();
 		for (Room room : rooms) {
-			if (room.reservations.isEmpty()) r++;
+			r.add(room.reservations.size());
 		}
-		return rooms.size() - r;
+		return r;
 	}
 }

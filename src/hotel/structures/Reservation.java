@@ -24,6 +24,6 @@ public class Reservation {
 	}
 	
 	public String toString() {
-		return ("from " + start.day + "/" + start.month + "/" + start.year + " to " + end.day + "/" + end.month + "/" + end.year + " at Room " + RoomID);
+		return ("from " + start.day + "/" + start.month + "/" + start.year + " to " + end.day + "/" + end.month + "/" + end.year);
 	}
 }

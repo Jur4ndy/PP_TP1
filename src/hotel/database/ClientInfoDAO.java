@@ -5,9 +5,16 @@ import java.sql.*;
 
 import hotel.structures.ClientInfo;
 
-
+/**
+ * This class accesses the ClientsInfo SQL Table.
+ */
 public class ClientInfoDAO extends SQLDatabase{
 	
+	/**
+	 * returns the ClientInfo corresponded to a cpf if the cpf is in the table, returns null otherwise.
+	 * @param cpf
+	 * @return
+	 */
 	public ClientInfo getClientInfo(int cpf) {
 	    try {
 	      Statement st = connection.createStatement();
@@ -21,6 +28,12 @@ public class ClientInfoDAO extends SQLDatabase{
 	    catch (SQLException e) { System.out.println(e); return null; }
 	  }
 	
+	/**
+	 * returns the ClientInfo corresponded to a name if the name is in the table, returns null otherwise.
+	 * DO NOTE that this wont function quite well if there are two people with the same name, however, this function isnt ever used.
+	 * @param cpf
+	 * @return
+	 */
 	public ClientInfo getClientInfo(String name) {
 	    try {
 	      Statement st = connection.createStatement();
@@ -34,6 +47,11 @@ public class ClientInfoDAO extends SQLDatabase{
 	    catch (SQLException e) { System.out.println(e); return null; }
 	  }
 	
+	/**
+	 * Adds a client to the table if their cpf isnt already registered.
+	 * @param clientinfo
+	 * @return
+	 */
 	public boolean addClient (ClientInfo clientinfo) {
 	    try {
 	      Statement st = connection.createStatement();

@@ -18,8 +18,6 @@ public class StaffLoginWindow extends JFrame {
 		super("Staff Login");
 		
 		Hotel hotel = new Hotel();
-		ReservationDAO reserveDAO = new ReservationDAO();
-		System.out.println(reserveDAO.getReservations(hotel));
 		
 		StaffLoginDAO staffData = new StaffLoginDAO();
 		
@@ -107,11 +105,11 @@ public class StaffLoginWindow extends JFrame {
         	    	if(staffData.login(user.getText(), password.getText())) {
         	    		rank = staffData.getRank(user.getText());
         	    		if (rank == 0) {
-        	    			ManagerWindow manage = new ManagerWindow(hotel);
+        	    			ManagerWindow manage = new ManagerWindow();
         	    			manage.setVisible(true);
         	    		}
         	    		else {
-        	    			StaffWindow staff = new StaffWindow(hotel);
+        	    			StaffWindow staff = new StaffWindow();
         	    			staff.setVisible(true);
         	    		}
         	    	} 
@@ -164,7 +162,7 @@ public class StaffLoginWindow extends JFrame {
         // Add rootPanel to frame
         this.setContentPane(rootPanel);
         this.setSize(1660, 600);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null); // center on screen
 	}
 }

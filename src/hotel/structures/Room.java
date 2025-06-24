@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Room {
 		
-		char type;
+		public char type;
 		public LinkedList<Reservation> reservations = new LinkedList<Reservation>();
 		
 		public Room(char type) {
